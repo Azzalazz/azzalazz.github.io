@@ -2,479 +2,756 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Azza Laz | Portfolio</title>
 
   <style>
     :root{
-      --bg0:#0b1020;
-      --bg1:#0f1733;
-      --card: rgba(255,255,255,0.08);
-      --card2: rgba(255,255,255,0.12);
-      --border: rgba(255,255,255,0.14);
-      --text:#eaf0ff;
-      --muted: rgba(234,240,255,0.78);
-      --muted2: rgba(234,240,255,0.62);
-      --accent:#7c5cff;   /* purple */
-      --accent2:#2de2e6;  /* cyan */
+      --bg:#0b1020;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.08);
+      --text:#eef1ff;
+      --muted: rgba(238,241,255,0.72);
+      --line: rgba(255,255,255,0.12);
+      --glow1:#7c5cff;
+      --glow2:#ff4fd8;
+      --glow3:#3af2ff;
       --shadow: 0 18px 60px rgba(0,0,0,0.45);
       --radius: 18px;
+      --max: 980px;
     }
 
-    *{ box-sizing: border-box; }
-    html{ scroll-behavior: smooth; }
-
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(1000px 700px at 15% 10%, rgba(124,92,255,0.25), transparent 55%),
-        radial-gradient(900px 650px at 85% 20%, rgba(45,226,230,0.18), transparent 60%),
-        radial-gradient(800px 600px at 50% 90%, rgba(124,92,255,0.16), transparent 60%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-      min-height:100vh;
+        radial-gradient(1200px 700px at 10% 10%, rgba(124,92,255,0.35), transparent 55%),
+        radial-gradient(900px 600px at 90% 15%, rgba(255,79,216,0.22), transparent 55%),
+        radial-gradient(900px 700px at 50% 95%, rgba(58,242,255,0.16), transparent 60%),
+        linear-gradient(180deg, #070a14 0%, #0b1020 35%, #070a14 100%);
+      overflow-x:hidden;
+    }
+
+    /* subtle grid */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: radial-gradient(60% 55% at 50% 20%, black 0%, transparent 70%);
+      pointer-events:none;
+      opacity:0.65;
     }
 
     .container{
-      max-width: 980px;
+      max-width: var(--max);
       margin: 0 auto;
-      padding: 54px 22px 80px;
+      padding: 0 20px;
     }
 
-    /* Top badge */
-    .top{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 18px;
-      margin-bottom: 18px;
-    }
-
-    .name{
-      margin:0;
-      font-size: clamp(32px, 4.5vw, 44px);
-      letter-spacing: -0.6px;
-      line-height: 1.05;
-    }
-
-    .subtitle{
-      margin:10px 0 0;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .pillrow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top: 14px;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: var(--muted);
-      font-size: 13px;
-      backdrop-filter: blur(10px);
-    }
-
-    /* Nav buttons */
+    /* NAVBAR */
     .nav{
+      position: sticky;
+      top:0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(10,14,28,0.55);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner{
       display:flex;
-      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      padding: 12px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .badge{
+      width:34px; height:34px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(124,92,255,0.9), rgba(255,79,216,0.75));
+      box-shadow: 0 10px 30px rgba(124,92,255,0.25);
+      border:1px solid rgba(255,255,255,0.15);
+    }
+    .badge svg{ filter: drop-shadow(0 6px 14px rgba(0,0,0,0.35)); }
+    .nav-links{
+      display:flex; align-items:center; gap:10px;
       flex-wrap:wrap;
       justify-content:flex-end;
     }
+    .nav a.link{
+      color: var(--muted);
+      text-decoration:none;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+      display:flex; align-items:center; gap:8px;
+      font-weight: 600;
+    }
+    .nav a.link:hover{
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.14);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
 
+    /* HERO */
+    .hero{
+      padding: 54px 0 24px;
+    }
+    .hero-card{
+      position:relative;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.045));
+      border-radius: 24px;
+      padding: 28px 22px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(500px 180px at 15% 20%, rgba(124,92,255,0.45), transparent 65%),
+        radial-gradient(420px 160px at 85% 25%, rgba(255,79,216,0.35), transparent 65%),
+        radial-gradient(560px 220px at 60% 105%, rgba(58,242,255,0.18), transparent 60%);
+      opacity:0.9;
+      pointer-events:none;
+      filter: blur(10px);
+      mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
+    }
+    .hero-top{
+      position:relative;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .title{
+      font-size: clamp(32px, 5vw, 46px);
+      margin: 0 0 8px 0;
+      letter-spacing: -0.7px;
+    }
+    .subtitle{
+      margin: 0;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .chips{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 14px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(238,241,255,0.86);
+      font-weight: 600;
+      font-size: 13px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .cta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 18px;
+    }
     .btn{
       display:inline-flex;
       align-items:center;
-      justify-content:center;
       gap:10px;
-      padding: 10px 14px;
-      border-radius: 12px;
+      padding: 11px 14px;
+      border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.06);
       color: var(--text);
       text-decoration:none;
       font-weight: 700;
-      font-size: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.20);
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
-      backdrop-filter: blur(10px);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
     }
     .btn:hover{
       transform: translateY(-2px);
-      background: rgba(255,255,255,0.11);
-      border-color: rgba(124,92,255,0.35);
+      background: rgba(255,255,255,0.09);
+      box-shadow: 0 16px 50px rgba(0,0,0,0.35);
+      border-color: rgba(255,255,255,0.22);
     }
     .btn.primary{
-      border-color: rgba(124,92,255,0.55);
-      background: linear-gradient(135deg, rgba(124,92,255,0.28), rgba(45,226,230,0.16));
+      background: linear-gradient(135deg, rgba(124,92,255,0.95), rgba(255,79,216,0.7));
+      border-color: rgba(255,255,255,0.2);
+      box-shadow: 0 18px 60px rgba(124,92,255,0.22);
+    }
+    .btn.primary:hover{
+      box-shadow: 0 22px 70px rgba(124,92,255,0.28);
     }
 
-    /* Sections */
-    .section{
-      margin-top: 32px;
-      padding-top: 10px;
+    /* SECTIONS */
+    section{
+      padding: 22px 0;
     }
-
     h2{
-      margin: 26px 0 14px;
+      margin: 28px 0 14px;
       font-size: 22px;
       letter-spacing: -0.2px;
       display:flex;
       align-items:center;
       gap:10px;
     }
-
     .underline{
-      height: 2px;
-      flex: 1;
-      background: linear-gradient(90deg, rgba(124,92,255,0.7), rgba(45,226,230,0.35), transparent);
+      height:1px;
+      background: linear-gradient(90deg, rgba(124,92,255,0.55), rgba(255,79,216,0.35), rgba(58,242,255,0.25));
       border-radius: 999px;
+      margin-top: 10px;
       opacity: 0.9;
     }
 
-    .glass{
-      background: var(--card);
-      border: 1px solid var(--border);
+    .card{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
       border-radius: var(--radius);
       padding: 18px 18px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
     }
-
     p{
-      margin: 10px 0;
+      color: rgba(238,241,255,0.82);
       line-height: 1.7;
-      color: var(--muted);
-      font-size: 15.5px;
     }
 
-    /* Projects */
-    #projects{ margin-top: 10px; }
+    /* FILTER BAR */
+    .filterbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin: 10px 0 14px;
+    }
+    .filters{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .filter{
+      cursor:pointer;
+      user-select:none;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(238,241,255,0.86);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, opacity .18s ease;
+    }
+    .filter:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.08); }
+    .filter.active{
+      background: linear-gradient(135deg, rgba(124,92,255,0.9), rgba(58,242,255,0.35));
+      border-color: rgba(255,255,255,0.22);
+    }
 
+    .count{
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* PROJECT GRID */
+    #projects{ margin-top: 12px; }
     .grid{
       display:grid;
       grid-template-columns: 1fr;
       gap: 14px;
     }
-    @media (min-width: 780px){
-      .grid{ grid-template-columns: 1fr 1fr; }
-    }
-
     .project{
       position:relative;
-      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.07));
       border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.045));
       border-radius: 18px;
-      padding: 18px 18px 16px;
+      padding: 18px 18px;
       overflow:hidden;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-      box-shadow: 0 14px 50px rgba(0,0,0,0.25);
-      backdrop-filter: blur(12px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.28);
     }
-
-    .project:before{
+    .project::before{
       content:"";
       position:absolute;
-      inset:-2px;
-      background: radial-gradient(600px 240px at 20% 0%, rgba(124,92,255,0.25), transparent 60%),
-                  radial-gradient(520px 220px at 80% 10%, rgba(45,226,230,0.18), transparent 65%);
-      opacity: .9;
+      inset:-1px;
+      background:
+        radial-gradient(420px 160px at 10% 15%, rgba(124,92,255,0.20), transparent 60%),
+        radial-gradient(420px 160px at 90% 30%, rgba(255,79,216,0.14), transparent 62%);
+      opacity:0.85;
       pointer-events:none;
     }
-
     .project:hover{
       transform: translateY(-4px);
-      border-color: rgba(124,92,255,0.32);
-      box-shadow: 0 18px 70px rgba(0,0,0,0.35);
+      border-color: rgba(255,255,255,0.22);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.35);
     }
-
-    .project > *{ position:relative; }
-
     .project h3{
-      margin: 0 0 8px;
-      font-size: 16.8px;
-      letter-spacing: -0.2px;
+      position:relative;
+      margin: 0 0 8px 0;
       color: var(--text);
+      font-size: 18px;
+      letter-spacing: -0.2px;
     }
-
     .meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 8px;
-      margin: 10px 0 0;
+      position:relative;
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 10px;
     }
-
     .tag{
-      display:inline-flex;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(238,241,255,0.85);
       padding: 6px 10px;
       border-radius: 999px;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: rgba(234,240,255,0.92);
-      background: rgba(124,92,255,0.16);
-      border: 1px solid rgba(124,92,255,0.22);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.2px;
     }
-    .tag.cyan{
-      background: rgba(45,226,230,0.12);
-      border-color: rgba(45,226,230,0.22);
-    }
+    .tag.iot{ border-color: rgba(58,242,255,0.25); }
+    .tag.data{ border-color: rgba(124,92,255,0.30); }
+    .tag.web{ border-color: rgba(255,79,216,0.25); }
 
-    .links{
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-      margin-top: 12px;
-    }
-
-    .link{
+    .project a{
+      position:relative;
       display:inline-flex;
       align-items:center;
-      gap: 8px;
+      gap:8px;
+      margin-top: 12px;
+      font-weight: 800;
+      text-decoration:none;
+      color: rgba(238,241,255,0.92);
       padding: 9px 12px;
       border-radius: 12px;
-      text-decoration:none;
-      font-weight: 800;
-      font-size: 13.5px;
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.08);
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
     }
-    .link:hover{
-      transform: translateY(-2px);
-      border-color: rgba(45,226,230,0.32);
-      background: rgba(255,255,255,0.11);
+    .project a:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.22);
     }
-    .link.primary{
-      border-color: rgba(124,92,255,0.45);
-      background: linear-gradient(135deg, rgba(124,92,255,0.25), rgba(45,226,230,0.12));
+    .links{ position:relative; display:flex; gap:10px; flex-wrap:wrap; }
+
+    /* RESUME */
+    .resume-actions{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top: 10px;
+    }
+    .pdf{
+      width:100%;
+      height: 720px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      overflow:hidden;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.28);
+      margin-top: 14px;
     }
 
-    /* Footer */
-    .footer{
-      margin-top: 34px;
-      color: var(--muted2);
-      font-size: 13px;
+    /* FOOTER */
+    footer{
+      padding: 30px 0 50px;
+      color: rgba(238,241,255,0.6);
+      font-weight: 600;
       text-align:center;
     }
 
-    /* Tiny sparkle */
-    .spark{
-      display:inline-block;
-      width: 10px; height: 10px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(124,92,255,0.7), rgba(45,226,230,0.25));
-      box-shadow: 0 0 18px rgba(124,92,255,0.35);
-      margin-right: 8px;
-      transform: translateY(-1px);
+    /* animations */
+    @media (prefers-reduced-motion: no-preference){
+      .floaty{ animation: floaty 4.8s ease-in-out infinite; }
+      @keyframes floaty{
+        0%,100%{ transform: translateY(0); }
+        50%{ transform: translateY(-6px); }
+      }
+      .sparkle{
+        position:absolute;
+        width: 10px; height: 10px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,255,255,0) 70%);
+        filter: blur(0.2px);
+        opacity: 0.55;
+        animation: drift 6s ease-in-out infinite;
+        pointer-events:none;
+      }
+      @keyframes drift{
+        0%,100%{ transform: translate(0,0) scale(1); opacity:.55; }
+        50%{ transform: translate(18px,-10px) scale(1.2); opacity:.30; }
+      }
+    }
+
+    /* responsive */
+    @media (min-width: 860px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+      .hero-card{ padding: 34px 28px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Back to top">
+          <span class="badge floaty" aria-hidden="true">
+            <!-- code icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M9 18l-6-6 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15 6l6 6-6 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>Azza Laz</span>
+        </a>
 
-    <div class="top">
-      <div>
-        <h1 class="name"><span class="spark"></span>Azza Laz</h1>
-        <p class="subtitle">Computer Science • Data Analytics • Applied Systems</p>
-
-        <div class="pillrow">
-          <span class="pill">Clean, maintainable code</span>
-          <span class="pill">Data-driven building</span>
-          <span class="pill">IoT + Cloud + Web</span>
+        <div class="nav-links">
+          <a class="link" href="#projects">
+            <span aria-hidden="true">📁</span> Projects
+          </a>
+          <a class="link" href="#resume">
+            <span aria-hidden="true">📄</span> Resume
+          </a>
+          <a class="link" href="https://www.linkedin.com/in/azzalaz" target="_blank" rel="noopener">
+            <span aria-hidden="true">🔗</span> LinkedIn
+          </a>
         </div>
       </div>
-
-      <div class="nav">
-        <a class="btn" href="#projects">Projects</a>
-        <a class="btn primary" href="#resume">Resume</a>
-        <a class="btn" href="#contact">Contact</a>
-      </div>
-    </div>
-
-    <section class="section glass" id="about">
-      <h2>About Me <span class="underline"></span></h2>
-      <p>
-        I’m a Computer Science graduate with a strong interest in data-driven systems, applied analytics, and building technology
-        that connects real-world signals to meaningful insights. I approach my work with an emphasis on clean, well-structured code,
-        clear documentation, and maintainable system design.
-      </p>
-      <p>
-        My experience spans software engineering, data analytics, IoT systems, and algorithm design—focused on translating complex technical problems
-        into practical, scalable solutions. I’ve worked on projects ranging from cloud-connected safety and energy systems to adaptive algorithms that
-        leverage implicit user signals, as well as business-focused analytics for high-traffic digital platforms.
-      </p>
-      <p>
-        I’m especially interested in roles where technical rigor meets real-world impact—across human-centered technology, digital platforms, and intelligent systems.
-      </p>
-    </section>
-
-    <section class="section" id="projects">
-      <h2>Projects <span class="underline"></span></h2>
-
-      <div class="grid">
-
-        <div class="project">
-          <h3>EcoSmart – IoT Smart Energy Management System</h3>
-          <p>
-            An IoT system that automatically controls lighting using motion + ambient light sensing to reduce unnecessary energy usage.
-            Built with real-time monitoring and cloud logging.
-          </p>
-          <div class="meta">
-            <span class="tag">ESP32 (C++)</span>
-            <span class="tag cyan">AWS EC2</span>
-            <span class="tag">Flask</span>
-            <span class="tag cyan">Bluetooth/WiFi</span>
-          </div>
-          <div class="links">
-            <a class="link primary" href="https://www.youtube.com/watch?v=Cvn3iM5ZI_4" target="_blank" rel="noopener">Video Demo</a>
-          </div>
-        </div>
-
-        <div class="project">
-          <h3>Latent Intuition Pruning – Adaptive Search Algorithm</h3>
-          <p>
-            Designed and implemented an adaptive decision-tree pruning approach using implicit signals (hover time, hesitation, temporal decay)
-            to improve prioritization while staying lightweight and interpretable.
-          </p>
-          <div class="meta">
-            <span class="tag">Python</span>
-            <span class="tag cyan">Algorithms</span>
-            <span class="tag">Data Structures</span>
-          </div>
-          <div class="links">
-            <a class="link primary" href="https://github.com/Azzalazz/latent-intuition-pruning" target="_blank" rel="noopener">GitHub Repo</a>
-          </div>
-        </div>
-
-        <div class="project">
-          <h3>Laser Bed Exit Detection System – Safety Monitor</h3>
-          <p>
-            Raspberry Pi–based system that detects bed exits using laser + sensor inputs and triggers real-time alerts for caregivers
-            (non-invasive, low-cost, scalable).
-          </p>
-          <div class="meta">
-            <span class="tag">Raspberry Pi</span>
-            <span class="tag cyan">Python</span>
-            <span class="tag">IoT Sensors</span>
-            <span class="tag cyan">IFTTT</span>
-          </div>
-          <div class="links">
-            <a class="link primary" href="https://www.canva.com/design/DAGYwjQLWfM/KPYHFdXsQr-IDIY09Q6S_w/edit" target="_blank" rel="noopener">Design Deck</a>
-          </div>
-        </div>
-
-        <div class="project">
-          <h3>Business Data Analyst & Website Co-Developer – NouraKreates</h3>
-          <p>
-            Built analytics dashboards and conducted A/B testing to understand user behavior and optimize conversions for an e-commerce platform.
-            Implemented insights into site improvements and strategy.
-          </p>
-          <div class="meta">
-            <span class="tag">SQL</span>
-            <span class="tag cyan">Google Analytics</span>
-            <span class="tag">Data Viz</span>
-            <span class="tag cyan">A/B Testing</span>
-          </div>
-          <div class="links">
-            <a class="link primary" href="https://nourakreates.com" target="_blank" rel="noopener">Live Website</a>
-          </div>
-        </div>
-
-        <div class="project">
-          <h3>Tour Website Developer – Shop.elyanna.com</h3>
-          <p>
-            Collaborated on Elyanna’s official merchandise & tour website. Built/maintained responsive Shopify pages, supported dynamic content updates,
-            and optimized UI/UX for high-traffic drops and tour activity.
-          </p>
-          <div class="meta">
-            <span class="tag">Shopify</span>
-            <span class="tag cyan">Liquid</span>
-            <span class="tag">HTML/CSS</span>
-            <span class="tag cyan">JavaScript</span>
-          </div>
-          <div class="links">
-            <a class="link primary" href="https://shop.elyanna.com" target="_blank" rel="noopener">Live Website</a>
-          </div>
-        </div>
-
-        <div class="project">
-          <h3>Outpost Zero – Multiplayer Survival Game</h3>
-          <p>
-            Team-built Unity survival game. Contributed to player systems, UI menus, control logic, and collaborated via GitHub
-            on integration and gameplay iteration.
-          </p>
-          <div class="meta">
-            <span class="tag">C#</span>
-            <span class="tag cyan">Unity</span>
-            <span class="tag">UI/UX</span>
-            <span class="tag cyan">GitHub</span>
-          </div>
-          <div class="links">
-            <a class="link primary" href="https://github.com/Azzalazz/Outpost-Zero" target="_blank" rel="noopener">GitHub Repo</a>
-          </div>
-        </div>
-
-        <div class="project">
-          <h3>Galaxy Striker – 2D Arcade Shooter</h3>
-          <p>
-            Developed a lane-based shooter with enemy scaling, projectiles, power-ups, and progression logic (difficulty increases over time).
-          </p>
-          <div class="meta">
-            <span class="tag">C#</span>
-            <span class="tag cyan">Unity</span>
-            <span class="tag">Game Logic</span>
-          </div>
-          <div class="links">
-            <a class="link primary" href="https://github.com/Azzalazz/Individual-2D-Project" target="_blank" rel="noopener">GitHub Repo</a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="section glass" id="resume">
-      <h2>Resume <span class="underline"></span></h2>
-      <p>
-        Download my resume here:
-      </p>
-      <div class="links">
-        <!-- IMPORTANT: put your PDF inside a folder named "resume" in your repo -->
-        <a class="link primary" href="resume/Resume-Azza-Laz.pdf" target="_blank" rel="noopener">Open Resume (PDF)</a>
-      </div>
-      <p style="color: var(--muted2); font-size: 13.5px;">
-        If the button 404s, it just means the PDF isn’t uploaded to <b>/resume/</b> yet.
-      </p>
-    </section>
-
-    <section class="section glass" id="contact">
-      <h2>Contact <span class="underline"></span></h2>
-      <p>
-        LinkedIn: <a class="link" href="https://www.linkedin.com/in/azzalaz" target="_blank" rel="noopener">www.linkedin.com/in/azzalaz</a>
-      </p>
-      <p>
-        GitHub: <a class="link" href="https://github.com/Azzalazz" target="_blank" rel="noopener">github.com/Azzalazz</a>
-      </p>
-    </section>
-
-    <div class="footer">
-      © <span id="year"></span> Azza Laz • Built with GitHub Pages
     </div>
   </div>
 
+  <!-- HERO -->
+  <div id="top" class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <span class="sparkle" style="top:18px; left:22px;"></span>
+        <span class="sparkle" style="top:38px; right:34px;"></span>
+        <span class="sparkle" style="bottom:22px; left:55%;"></span>
+
+        <div class="hero-top">
+          <div style="position:relative; z-index:1; max-width: 620px;">
+            <h1 class="title">Azza Laz</h1>
+            <p class="subtitle">Computer Science • Data Analytics • Applied Systems</p>
+
+            <div class="chips">
+              <span class="chip">✨ Clean, well-structured code</span>
+              <span class="chip">⚡ Real-world, end-to-end builds</span>
+              <span class="chip">📊 Data-driven decisions</span>
+            </div>
+
+            <div class="cta">
+              <a class="btn primary" href="#projects">
+                <span aria-hidden="true">🚀</span> Explore Projects
+              </a>
+              <a class="btn" href="#resume">
+                <span aria-hidden="true">📄</span> View Resume
+              </a>
+              <a class="btn" href="https://www.linkedin.com/in/azzalaz" target="_blank" rel="noopener">
+                <span aria-hidden="true">💬</span> Connect
+              </a>
+            </div>
+          </div>
+
+          <div class="card" style="position:relative; z-index:1; flex:1; min-width: 260px;">
+            <p style="margin:0;">
+              I’m a Computer Science graduate with a strong interest in data-driven systems, applied analytics,
+              and building technology that connects real-world signals to meaningful insights.
+              I approach my work with an emphasis on <b>clean, maintainable code</b>, clear documentation,
+              and thoughtful system design.
+            </p>
+          </div>
+        </div>
+
+        <div class="underline"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <h2>About Me <span style="opacity:.75;">✧</span></h2>
+      <div class="card">
+        <p style="margin-top:0;">
+          My experience spans software engineering, data analytics, IoT systems, and algorithm design—focused on
+          translating complex technical problems into practical, scalable solutions. I’ve worked on cloud-connected
+          safety and energy systems, adaptive algorithms that leverage implicit user signals, and business-focused
+          analytics for high-traffic digital platforms.
+        </p>
+        <p style="margin-bottom:0;">
+          I’m particularly interested in applying data science and analytics to human-centered technology, digital
+          platforms, and intelligent systems—where technical rigor meets real-world impact.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <h2>Projects <span style="opacity:.75;">🧠</span></h2>
+
+      <div class="filterbar">
+        <div class="filters" role="tablist" aria-label="Project filters">
+          <button class="filter active" data-filter="all" type="button">
+            <span aria-hidden="true">✨</span> All
+          </button>
+          <button class="filter" data-filter="iot" type="button">
+            <span aria-hidden="true">📡</span> IoT
+          </button>
+          <button class="filter" data-filter="data" type="button">
+            <span aria-hidden="true">📊</span> Data
+          </button>
+          <button class="filter" data-filter="web" type="button">
+            <span aria-hidden="true">🌐</span> Web
+          </button>
+        </div>
+        <div class="count" id="countText">Showing all projects</div>
+      </div>
+
+      <div class="grid" id="projectGrid">
+
+        <!-- EcoSmart -->
+        <div class="project" data-category="iot">
+          <h3>EcoSmart – IoT Smart Energy Management System</h3>
+          <p>
+            An IoT-based system that automatically controls lighting using motion and ambient light sensors to reduce
+            unnecessary energy usage. Built with real-time monitoring + cloud logging.
+          </p>
+          <div class="meta">
+            <span class="tag iot">IoT</span>
+            <span class="tag iot">Embedded</span>
+          </div>
+          <p style="margin-top:10px; color: var(--muted);">
+            <b>Tech:</b> ESP32 (C++), AWS EC2, Flask, Bluetooth, Data Logging
+          </p>
+          <div class="links">
+            <a href="https://www.youtube.com/watch?v=Cvn3iM5ZI_4" target="_blank" rel="noopener">
+              ▶ Video Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- Latent Intuition Pruning -->
+        <div class="project" data-category="data">
+          <h3>Latent Intuition Pruning – Adaptive Search Algorithm</h3>
+          <p>
+            Designed and implemented an adaptive decision-tree pruning algorithm that leverages implicit user signals
+            (hover time, hesitation, temporal decay) to improve search efficiency while staying lightweight and interpretable.
+          </p>
+          <div class="meta">
+            <span class="tag data">Data</span>
+            <span class="tag data">Algorithms</span>
+          </div>
+          <p style="margin-top:10px; color: var(--muted);">
+            <b>Tech:</b> Python, Algorithms, Data Structures
+          </p>
+          <div class="links">
+            <a href="https://github.com/Azzalazz/latent-intuition-pruning" target="_blank" rel="noopener">
+              ↗ GitHub Repository
+            </a>
+          </div>
+        </div>
+
+        <!-- Laser Bed Exit -->
+        <div class="project" data-category="iot">
+          <h3>Laser Bed Exit Detection System</h3>
+          <p>
+            A Raspberry Pi–based safety monitoring system that detects bed exits using laser sensors and triggers real-time
+            alerts for caregivers (non-invasive, scalable design).
+          </p>
+          <div class="meta">
+            <span class="tag iot">IoT</span>
+            <span class="tag iot">Safety</span>
+          </div>
+          <p style="margin-top:10px; color: var(--muted);">
+            <b>Tech:</b> Raspberry Pi, Python, IoT Sensors, IFTTT
+          </p>
+          <div class="links">
+            <a href="https://www.canva.com/design/DAGYwjQLWfM/KPYHFdXsQr-IDIY09Q6S_w/edit" target="_blank" rel="noopener">
+              📎 Project Deck
+            </a>
+          </div>
+        </div>
+
+        <!-- NouraKreates -->
+        <div class="project" data-category="data">
+          <h3>Business Data Analyst & Website Co-Developer – NouraKreates</h3>
+          <p>
+            Built analytics dashboards, tracked engagement and conversions, and ran A/B testing experiments to optimize
+            UX and performance for an e-commerce platform.
+          </p>
+          <div class="meta">
+            <span class="tag data">Data</span>
+            <span class="tag web">Web</span>
+          </div>
+          <p style="margin-top:10px; color: var(--muted);">
+            <b>Tech:</b> SQL, Google Analytics, Data Visualization, A/B Testing
+          </p>
+          <div class="links">
+            <a href="https://nourakreates.com" target="_blank" rel="noopener">
+              🌐 Live Website
+            </a>
+          </div>
+        </div>
+
+        <!-- Elyanna -->
+        <div class="project" data-category="web">
+          <h3>Tour Website Developer – Shop.elyanna.com</h3>
+          <p>
+            Built and maintained responsive Shopify pages for Elyanna’s official merchandise + tour site, supporting
+            high-traffic drops, tour updates, and conversion-focused UI/UX improvements.
+          </p>
+          <div class="meta">
+            <span class="tag web">Web</span>
+            <span class="tag web">Shopify</span>
+          </div>
+          <p style="margin-top:10px; color: var(--muted);">
+            <b>Tech:</b> Shopify, Liquid, HTML/CSS, JavaScript
+          </p>
+          <div class="links">
+            <a href="https://shop.elyanna.com" target="_blank" rel="noopener">
+              🌐 Live Website
+            </a>
+          </div>
+        </div>
+
+        <!-- Outpost Zero -->
+        <div class="project" data-category="web">
+          <h3>Outpost Zero – Multiplayer Survival Game</h3>
+          <p>
+            Collaborated in a team to build a Unity survival game; contributed to player systems, UI menus, and control
+            logic while coordinating development through GitHub.
+          </p>
+          <div class="meta">
+            <span class="tag web">Dev</span>
+            <span class="tag web">Team</span>
+          </div>
+          <p style="margin-top:10px; color: var(--muted);">
+            <b>Tech:</b> C#, Unity, UI/UX, GitHub
+          </p>
+          <div class="links">
+            <a href="https://github.com/Azzalazz/Outpost-Zero" target="_blank" rel="noopener">
+              ↗ GitHub Repository
+            </a>
+          </div>
+        </div>
+
+        <!-- Galaxy Striker -->
+        <div class="project" data-category="web">
+          <h3>Galaxy Striker – 2D Arcade Shooter</h3>
+          <p>
+            Developed a 2D lane-based shooter with increasing difficulty, projectile mechanics, and progression logic.
+            Focused on clean OOP structure and real-time updates.
+          </p>
+          <div class="meta">
+            <span class="tag web">Dev</span>
+            <span class="tag web">OOP</span>
+          </div>
+          <p style="margin-top:10px; color: var(--muted);">
+            <b>Tech:</b> C#, Unity, Game Logic
+          </p>
+          <div class="links">
+            <a href="https://github.com/Azzalazz/Individual-2D-Project" target="_blank" rel="noopener">
+              ↗ GitHub Repository
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section id="resume">
+    <div class="container">
+      <h2>Resume <span style="opacity:.75;">📄</span></h2>
+
+      <div class="card">
+        <p style="margin-top:0;">
+          Download or view my resume here:
+        </p>
+
+        <div class="resume-actions">
+          <a class="btn primary" href="resume/Resume-Azza-Laz.pdf" target="_blank" rel="noopener">
+            ⬇ Download Resume (PDF)
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/azzalaz" target="_blank" rel="noopener">
+            🔗 LinkedIn
+          </a>
+        </div>
+
+        <iframe class="pdf" title="Azza Laz Resume" src="resume/Resume-Azza-Laz.pdf"></iframe>
+        <p style="margin-bottom:0; color: var(--muted); font-size: 13px;">
+          If the PDF preview doesn’t load on some browsers, the download button above will always work.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Built with ✨ GitHub Pages • Azza Laz • <a href="https://www.linkedin.com/in/azzalaz" target="_blank" rel="noopener" style="color:rgba(238,241,255,0.8);">LinkedIn</a>
+  </footer>
+
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Project filtering
+    const filters = document.querySelectorAll(".filter");
+    const cards = document.querySelectorAll(".project");
+    const countText = document.getElementById("countText");
+
+    function updateCount(filter, shown){
+      if(filter === "all") countText.textContent = "Showing all projects (" + shown + ")";
+      else countText.textContent = "Showing " + filter.toUpperCase() + " projects (" + shown + ")";
+    }
+
+    function applyFilter(filter){
+      let shown = 0;
+      cards.forEach(card => {
+        const cat = card.getAttribute("data-category");
+        const match = (filter === "all" || cat === filter);
+        card.style.display = match ? "" : "none";
+        if(match) shown++;
+      });
+      updateCount(filter, shown);
+    }
+
+    filters.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filters.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        applyFilter(btn.dataset.filter);
+      });
+    });
+
+    // default
+    applyFilter("all");
   </script>
 </body>
 </html>
