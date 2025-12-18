@@ -6,171 +6,475 @@
   <title>Azza Laz | Portfolio</title>
 
   <style>
-    /* Base styles */
-    body {
+    :root{
+      --bg0:#0b1020;
+      --bg1:#0f1733;
+      --card: rgba(255,255,255,0.08);
+      --card2: rgba(255,255,255,0.12);
+      --border: rgba(255,255,255,0.14);
+      --text:#eaf0ff;
+      --muted: rgba(234,240,255,0.78);
+      --muted2: rgba(234,240,255,0.62);
+      --accent:#7c5cff;   /* purple */
+      --accent2:#2de2e6;  /* cyan */
+      --shadow: 0 18px 60px rgba(0,0,0,0.45);
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+
+    body{
+      margin:0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background-color: #0f172a;
-      color: #e5e7eb;
-      margin: 0;
-      padding: 0;
-      line-height: 1.7;
+      color: var(--text);
+      background:
+        radial-gradient(1000px 700px at 15% 10%, rgba(124,92,255,0.25), transparent 55%),
+        radial-gradient(900px 650px at 85% 20%, rgba(45,226,230,0.18), transparent 60%),
+        radial-gradient(800px 600px at 50% 90%, rgba(124,92,255,0.16), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height:100vh;
     }
 
-    .container {
-      max-width: 900px;
+    .container{
+      max-width: 980px;
       margin: 0 auto;
-      padding: 60px 24px;
+      padding: 54px 22px 80px;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
+    /* Top badge */
+    .top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 18px;
+      margin-bottom: 18px;
     }
 
-    h2 {
-      font-size: 1.6rem;
-      margin-top: 50px;
-      margin-bottom: 16px;
-      border-bottom: 2px solid #334155;
-      padding-bottom: 6px;
+    .name{
+      margin:0;
+      font-size: clamp(32px, 4.5vw, 44px);
+      letter-spacing: -0.6px;
+      line-height: 1.05;
     }
 
-    p {
-      color: #cbd5f5;
-    }
-
-    /* Projects section */
-    #projects {
-      margin-top: 48px;
-    }
-
-    .project {
-      background: #faf9ff;
-      border: 1px solid #e6e3ff;
-      border-radius: 16px;
-      padding: 20px 22px;
-      margin-bottom: 22px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      color: #111827;
-    }
-
-    .project:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(120, 100, 255, 0.15);
-    }
-
-    .project h3 {
-      margin-top: 0;
-      margin-bottom: 8px;
-      color: #3b2fbf;
-      font-size: 18px;
-    }
-
-    .project p {
-      margin: 6px 0;
-      color: #333;
-    }
-
-    .project .tech {
-      font-size: 14px;
-      color: #6b63d9;
-      font-weight: 500;
-    }
-
-    .project a {
-      display: inline-block;
-      margin-top: 10px;
+    .subtitle{
+      margin:10px 0 0;
+      color: var(--muted);
       font-weight: 600;
-      text-decoration: none;
-      color: #5a4bff;
     }
 
-    .project a:hover {
-      text-decoration: underline;
+    .pillrow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 14px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--muted);
+      font-size: 13px;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Nav buttons */
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.20);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      backdrop-filter: blur(10px);
+    }
+    .btn:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.11);
+      border-color: rgba(124,92,255,0.35);
+    }
+    .btn.primary{
+      border-color: rgba(124,92,255,0.55);
+      background: linear-gradient(135deg, rgba(124,92,255,0.28), rgba(45,226,230,0.16));
+    }
+
+    /* Sections */
+    .section{
+      margin-top: 32px;
+      padding-top: 10px;
+    }
+
+    h2{
+      margin: 26px 0 14px;
+      font-size: 22px;
+      letter-spacing: -0.2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .underline{
+      height: 2px;
+      flex: 1;
+      background: linear-gradient(90deg, rgba(124,92,255,0.7), rgba(45,226,230,0.35), transparent);
+      border-radius: 999px;
+      opacity: 0.9;
+    }
+
+    .glass{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    p{
+      margin: 10px 0;
+      line-height: 1.7;
+      color: var(--muted);
+      font-size: 15.5px;
+    }
+
+    /* Projects */
+    #projects{ margin-top: 10px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 780px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
+
+    .project{
+      position:relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.07));
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      overflow:hidden;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      box-shadow: 0 14px 50px rgba(0,0,0,0.25);
+      backdrop-filter: blur(12px);
+    }
+
+    .project:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(600px 240px at 20% 0%, rgba(124,92,255,0.25), transparent 60%),
+                  radial-gradient(520px 220px at 80% 10%, rgba(45,226,230,0.18), transparent 65%);
+      opacity: .9;
+      pointer-events:none;
+    }
+
+    .project:hover{
+      transform: translateY(-4px);
+      border-color: rgba(124,92,255,0.32);
+      box-shadow: 0 18px 70px rgba(0,0,0,0.35);
+    }
+
+    .project > *{ position:relative; }
+
+    .project h3{
+      margin: 0 0 8px;
+      font-size: 16.8px;
+      letter-spacing: -0.2px;
+      color: var(--text);
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin: 10px 0 0;
+    }
+
+    .tag{
+      display:inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: rgba(234,240,255,0.92);
+      background: rgba(124,92,255,0.16);
+      border: 1px solid rgba(124,92,255,0.22);
+    }
+    .tag.cyan{
+      background: rgba(45,226,230,0.12);
+      border-color: rgba(45,226,230,0.22);
+    }
+
+    .links{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+
+    .link{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 12px;
+      text-decoration:none;
+      font-weight: 800;
+      font-size: 13.5px;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .link:hover{
+      transform: translateY(-2px);
+      border-color: rgba(45,226,230,0.32);
+      background: rgba(255,255,255,0.11);
+    }
+    .link.primary{
+      border-color: rgba(124,92,255,0.45);
+      background: linear-gradient(135deg, rgba(124,92,255,0.25), rgba(45,226,230,0.12));
+    }
+
+    /* Footer */
+    .footer{
+      margin-top: 34px;
+      color: var(--muted2);
+      font-size: 13px;
+      text-align:center;
+    }
+
+    /* Tiny sparkle */
+    .spark{
+      display:inline-block;
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(124,92,255,0.7), rgba(45,226,230,0.25));
+      box-shadow: 0 0 18px rgba(124,92,255,0.35);
+      margin-right: 8px;
+      transform: translateY(-1px);
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <h1>Azza Laz</h1>
-    <p>Computer Science • Data Analytics • Applied Systems</p>
 
-    <h2>About Me</h2>
-    <p>
-      I’m a Computer Science graduate with a strong interest in data-driven systems,
-      applied analytics, and building technology that connects real-world signals
-      to meaningful insights. I approach my work with an emphasis on clean,
-      well-structured code, clear documentation, and maintainable system design.
-    </p>
+    <div class="top">
+      <div>
+        <h1 class="name"><span class="spark"></span>Azza Laz</h1>
+        <p class="subtitle">Computer Science • Data Analytics • Applied Systems</p>
 
-    <p>
-      My experience spans software engineering, data analytics, IoT systems, and
-      algorithm design, with a focus on translating complex technical problems into
-      practical, scalable solutions. I’ve worked on cloud-connected safety and
-      energy systems, adaptive algorithms using implicit user signals, and
-      business-focused analytics for high-traffic digital platforms.
-    </p>
+        <div class="pillrow">
+          <span class="pill">Clean, maintainable code</span>
+          <span class="pill">Data-driven building</span>
+          <span class="pill">IoT + Cloud + Web</span>
+        </div>
+      </div>
 
-    <p>
-      I’m particularly interested in applying data science and analytics to
-      human-centered technology, digital platforms, and intelligent systems—where
-      technical rigor meets real-world impact.
-    </p>
-
-    <h2 id="projects">Projects</h2>
-
-    <div class="project">
-      <h3>EcoSmart – IoT Smart Energy Management System</h3>
-      <p>
-        An IoT-based system that automatically controls lighting using motion and
-        ambient light sensors to reduce unnecessary energy usage.
-      </p>
-      <p class="tech">ESP32 (C++), IoT, AWS EC2, Flask, Bluetooth</p>
-      <a href="https://www.youtube.com/watch?v=Cvn3iM5ZI_4" target="_blank">Video Demo</a>
+      <div class="nav">
+        <a class="btn" href="#projects">Projects</a>
+        <a class="btn primary" href="#resume">Resume</a>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
     </div>
 
-    <div class="project">
-      <h3>Latent Intuition Pruning – Adaptive Search Algorithm</h3>
+    <section class="section glass" id="about">
+      <h2>About Me <span class="underline"></span></h2>
       <p>
-        Designed and implemented an adaptive decision-tree pruning algorithm that
-        leverages implicit user signals such as hover time and hesitation to improve
-        search efficiency.
+        I’m a Computer Science graduate with a strong interest in data-driven systems, applied analytics, and building technology
+        that connects real-world signals to meaningful insights. I approach my work with an emphasis on clean, well-structured code,
+        clear documentation, and maintainable system design.
       </p>
-      <p class="tech">Python, Algorithms, Data Structures</p>
-      <a href="https://github.com/Azzalazz/latent-intuition-pruning" target="_blank">
-        GitHub Repository
-      </a>
-    </div>
+      <p>
+        My experience spans software engineering, data analytics, IoT systems, and algorithm design—focused on translating complex technical problems
+        into practical, scalable solutions. I’ve worked on projects ranging from cloud-connected safety and energy systems to adaptive algorithms that
+        leverage implicit user signals, as well as business-focused analytics for high-traffic digital platforms.
+      </p>
+      <p>
+        I’m especially interested in roles where technical rigor meets real-world impact—across human-centered technology, digital platforms, and intelligent systems.
+      </p>
+    </section>
 
-    <div class="project">
-      <h3>Laser Bed Exit Detection System</h3>
-      <p>
-        A Raspberry Pi–based safety monitoring system that detects bed exits using
-        laser sensors and triggers real-time alerts for caregivers.
-      </p>
-      <p class="tech">Raspberry Pi, Python, IoT Sensors, IFTTT</p>
-    </div>
+    <section class="section" id="projects">
+      <h2>Projects <span class="underline"></span></h2>
 
-    <div class="project">
-      <h3>Business Data Analyst & Website Co-Developer – NouraKreates</h3>
-      <p>
-        Built analytics dashboards and conducted A/B testing to analyze user behavior
-        and optimize conversions for an e-commerce platform.
-      </p>
-      <p class="tech">SQL, Google Analytics, Data Visualization</p>
-      <a href="https://nourakreates.com" target="_blank">Live Website</a>
-    </div>
+      <div class="grid">
 
-    <div class="project">
-      <h3>Tour Website Developer – Elyanna (Shop.Elyanna.com)</h3>
+        <div class="project">
+          <h3>EcoSmart – IoT Smart Energy Management System</h3>
+          <p>
+            An IoT system that automatically controls lighting using motion + ambient light sensing to reduce unnecessary energy usage.
+            Built with real-time monitoring and cloud logging.
+          </p>
+          <div class="meta">
+            <span class="tag">ESP32 (C++)</span>
+            <span class="tag cyan">AWS EC2</span>
+            <span class="tag">Flask</span>
+            <span class="tag cyan">Bluetooth/WiFi</span>
+          </div>
+          <div class="links">
+            <a class="link primary" href="https://www.youtube.com/watch?v=Cvn3iM5ZI_4" target="_blank" rel="noopener">Video Demo</a>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>Latent Intuition Pruning – Adaptive Search Algorithm</h3>
+          <p>
+            Designed and implemented an adaptive decision-tree pruning approach using implicit signals (hover time, hesitation, temporal decay)
+            to improve prioritization while staying lightweight and interpretable.
+          </p>
+          <div class="meta">
+            <span class="tag">Python</span>
+            <span class="tag cyan">Algorithms</span>
+            <span class="tag">Data Structures</span>
+          </div>
+          <div class="links">
+            <a class="link primary" href="https://github.com/Azzalazz/latent-intuition-pruning" target="_blank" rel="noopener">GitHub Repo</a>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>Laser Bed Exit Detection System – Safety Monitor</h3>
+          <p>
+            Raspberry Pi–based system that detects bed exits using laser + sensor inputs and triggers real-time alerts for caregivers
+            (non-invasive, low-cost, scalable).
+          </p>
+          <div class="meta">
+            <span class="tag">Raspberry Pi</span>
+            <span class="tag cyan">Python</span>
+            <span class="tag">IoT Sensors</span>
+            <span class="tag cyan">IFTTT</span>
+          </div>
+          <div class="links">
+            <a class="link primary" href="https://www.canva.com/design/DAGYwjQLWfM/KPYHFdXsQr-IDIY09Q6S_w/edit" target="_blank" rel="noopener">Design Deck</a>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>Business Data Analyst & Website Co-Developer – NouraKreates</h3>
+          <p>
+            Built analytics dashboards and conducted A/B testing to understand user behavior and optimize conversions for an e-commerce platform.
+            Implemented insights into site improvements and strategy.
+          </p>
+          <div class="meta">
+            <span class="tag">SQL</span>
+            <span class="tag cyan">Google Analytics</span>
+            <span class="tag">Data Viz</span>
+            <span class="tag cyan">A/B Testing</span>
+          </div>
+          <div class="links">
+            <a class="link primary" href="https://nourakreates.com" target="_blank" rel="noopener">Live Website</a>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>Tour Website Developer – Shop.elyanna.com</h3>
+          <p>
+            Collaborated on Elyanna’s official merchandise & tour website. Built/maintained responsive Shopify pages, supported dynamic content updates,
+            and optimized UI/UX for high-traffic drops and tour activity.
+          </p>
+          <div class="meta">
+            <span class="tag">Shopify</span>
+            <span class="tag cyan">Liquid</span>
+            <span class="tag">HTML/CSS</span>
+            <span class="tag cyan">JavaScript</span>
+          </div>
+          <div class="links">
+            <a class="link primary" href="https://shop.elyanna.com" target="_blank" rel="noopener">Live Website</a>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>Outpost Zero – Multiplayer Survival Game</h3>
+          <p>
+            Team-built Unity survival game. Contributed to player systems, UI menus, control logic, and collaborated via GitHub
+            on integration and gameplay iteration.
+          </p>
+          <div class="meta">
+            <span class="tag">C#</span>
+            <span class="tag cyan">Unity</span>
+            <span class="tag">UI/UX</span>
+            <span class="tag cyan">GitHub</span>
+          </div>
+          <div class="links">
+            <a class="link primary" href="https://github.com/Azzalazz/Outpost-Zero" target="_blank" rel="noopener">GitHub Repo</a>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>Galaxy Striker – 2D Arcade Shooter</h3>
+          <p>
+            Developed a lane-based shooter with enemy scaling, projectiles, power-ups, and progression logic (difficulty increases over time).
+          </p>
+          <div class="meta">
+            <span class="tag">C#</span>
+            <span class="tag cyan">Unity</span>
+            <span class="tag">Game Logic</span>
+          </div>
+          <div class="links">
+            <a class="link primary" href="https://github.com/Azzalazz/Individual-2D-Project" target="_blank" rel="noopener">GitHub Repo</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section glass" id="resume">
+      <h2>Resume <span class="underline"></span></h2>
       <p>
-        Collaborated on the development of Elyanna’s official merchandise and tour
-        website, supporting high-traffic product launches and live tour updates.
+        Download my resume here:
       </p>
-      <p class="tech">Shopify, Liquid, HTML/CSS, JavaScript</p>
-      <a href="https://shop.elyanna.com" target="_blank">Live Website</a>
+      <div class="links">
+        <!-- IMPORTANT: put your PDF inside a folder named "resume" in your repo -->
+        <a class="link primary" href="resume/Resume-Azza-Laz.pdf" target="_blank" rel="noopener">Open Resume (PDF)</a>
+      </div>
+      <p style="color: var(--muted2); font-size: 13.5px;">
+        If the button 404s, it just means the PDF isn’t uploaded to <b>/resume/</b> yet.
+      </p>
+    </section>
+
+    <section class="section glass" id="contact">
+      <h2>Contact <span class="underline"></span></h2>
+      <p>
+        LinkedIn: <a class="link" href="https://www.linkedin.com/in/azzalaz" target="_blank" rel="noopener">www.linkedin.com/in/azzalaz</a>
+      </p>
+      <p>
+        GitHub: <a class="link" href="https://github.com/Azzalazz" target="_blank" rel="noopener">github.com/Azzalazz</a>
+      </p>
+    </section>
+
+    <div class="footer">
+      © <span id="year"></span> Azza Laz • Built with GitHub Pages
     </div>
   </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
