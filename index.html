@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Azza Laz | Portfolio</title>
 
   <style>
+    /* Base styles */
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       background-color: #0f172a;
@@ -35,9 +36,57 @@
     }
 
     p {
-      font-size: 1.05rem;
-      color: #d1d5db;
-      margin-bottom: 16px;
+      color: #cbd5f5;
+    }
+
+    /* Projects section */
+    #projects {
+      margin-top: 48px;
+    }
+
+    .project {
+      background: #faf9ff;
+      border: 1px solid #e6e3ff;
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin-bottom: 22px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      color: #111827;
+    }
+
+    .project:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(120, 100, 255, 0.15);
+    }
+
+    .project h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: #3b2fbf;
+      font-size: 18px;
+    }
+
+    .project p {
+      margin: 6px 0;
+      color: #333;
+    }
+
+    .project .tech {
+      font-size: 14px;
+      color: #6b63d9;
+      font-weight: 500;
+    }
+
+    .project a {
+      display: inline-block;
+      margin-top: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      color: #5a4bff;
+    }
+
+    .project a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -48,109 +97,80 @@
     <p>Computer Science • Data Analytics • Applied Systems</p>
 
     <h2>About Me</h2>
-
     <p>
       I’m a Computer Science graduate with a strong interest in data-driven systems,
-      applied analytics, and building technology that connects real-world signals to
-      meaningful insights. I approach my work with an emphasis on clean, well-structured
-      code, clear documentation, and maintainable system design.
+      applied analytics, and building technology that connects real-world signals
+      to meaningful insights. I approach my work with an emphasis on clean,
+      well-structured code, clear documentation, and maintainable system design.
     </p>
 
     <p>
-      My academic and project experience spans software engineering, data analytics,
-      IoT systems, and algorithm design, with a focus on translating complex technical
-      problems into practical, scalable solutions. I’ve worked on projects ranging from
-      cloud-connected IoT safety and energy systems to adaptive algorithms that leverage
-      implicit user signals, as well as business-focused analytics for high-traffic
-      digital platforms.
-    </p>
-
-    <p>
-      Through these experiences, I’ve developed a strong foundation in Python, SQL,
-      cloud technologies, and system-level thinking, while maintaining attention to
-      usability, reliability, and real-world constraints. I value writing clean,
-      readable code and designing systems that are both efficient and intuitive.
+      My experience spans software engineering, data analytics, IoT systems, and
+      algorithm design, with a focus on translating complex technical problems into
+      practical, scalable solutions. I’ve worked on cloud-connected safety and
+      energy systems, adaptive algorithms using implicit user signals, and
+      business-focused analytics for high-traffic digital platforms.
     </p>
 
     <p>
       I’m particularly interested in applying data science and analytics to
-      human-centered technology, digital platforms, and intelligent systems, where
-      technical rigor meets real impact. I’m currently preparing for graduate study
-      in Data Science or Computer Science to deepen my skills in statistical modeling,
-      machine learning, and large-scale data systems while continuing to build applied,
-      end-to-end solutions.
+      human-centered technology, digital platforms, and intelligent systems—where
+      technical rigor meets real-world impact.
     </p>
-<section id="projects">
-  <h2>Projects</h2>
 
-  <div class="project">
-    <h3>EcoSmart – IoT Smart Energy Management System</h3>
-    <p>
-      An IoT-based system that automatically controls lighting using motion and
-      ambient light sensors to reduce unnecessary energy usage.
-    </p>
-    <p class="tech">
-      ESP32 (C++), IoT, AWS EC2, Flask, Bluetooth
-    </p>
-    <a href="https://www.youtube.com/watch?v=Cvn3iM5ZI_4" target="_blank">
-      ▶ Video Demo
-    </a>
-  </div>
+    <h2 id="projects">Projects</h2>
 
-  <div class="project">
-    <h3>Latent Intuition Pruning – Adaptive Search Algorithm</h3>
-    <p>
-      Designed and implemented an adaptive decision-tree pruning algorithm that
-      leverages implicit user signals such as hover time and hesitation to
-      improve search efficiency.
-    </p>
-    <p class="tech">
-      Python, Algorithms, Data Structures
-    </p>
-    <a href="https://github.com/Azzalazz/latent-intuition-pruning" target="_blank">
-      View on GitHub →
-    </a>
-  </div>
+    <div class="project">
+      <h3>EcoSmart – IoT Smart Energy Management System</h3>
+      <p>
+        An IoT-based system that automatically controls lighting using motion and
+        ambient light sensors to reduce unnecessary energy usage.
+      </p>
+      <p class="tech">ESP32 (C++), IoT, AWS EC2, Flask, Bluetooth</p>
+      <a href="https://www.youtube.com/watch?v=Cvn3iM5ZI_4" target="_blank">Video Demo</a>
+    </div>
 
-  <div class="project">
-    <h3>Laser Bed Exit Detection System</h3>
-    <p>
-      A Raspberry Pi–based safety monitoring system that detects bed exits using
-      laser sensors and sends real-time alerts to caregivers.
-    </p>
-    <p class="tech">
-      Raspberry Pi, Python, IoT Sensors, IFTTT
-    </p>
-  </div>
+    <div class="project">
+      <h3>Latent Intuition Pruning – Adaptive Search Algorithm</h3>
+      <p>
+        Designed and implemented an adaptive decision-tree pruning algorithm that
+        leverages implicit user signals such as hover time and hesitation to improve
+        search efficiency.
+      </p>
+      <p class="tech">Python, Algorithms, Data Structures</p>
+      <a href="https://github.com/Azzalazz/latent-intuition-pruning" target="_blank">
+        GitHub Repository
+      </a>
+    </div>
 
-  <div class="project">
-    <h3>Business Data Analyst & Website Co-Developer – NouraKreates</h3>
-    <p>
-      Co-developed an e-commerce website and analyzed user behavior through
-      dashboards, A/B testing, and conversion optimization strategies.
-    </p>
-    <p class="tech">
-      SQL, Google Analytics, Data Visualization
-    </p>
-    <a href="https://nourakreates.com" target="_blank">
-      Live Website →
-    </a>
-  </div>
+    <div class="project">
+      <h3>Laser Bed Exit Detection System</h3>
+      <p>
+        A Raspberry Pi–based safety monitoring system that detects bed exits using
+        laser sensors and triggers real-time alerts for caregivers.
+      </p>
+      <p class="tech">Raspberry Pi, Python, IoT Sensors, IFTTT</p>
+    </div>
 
-  <div class="project">
-    <h3>Tour Website Developer – Elyanna</h3>
-    <p>
-      Collaborated on the development of Elyanna’s official merchandise and tour
-      website, supporting high-traffic drops, tour schedules, and live updates.
-    </p>
-    <p class="tech">
-      Shopify, Liquid, HTML/CSS, JavaScript
-    </p>
-    <a href="https://shop.elyanna.com" target="_blank">
-      Live Website →
-    </a>
-  </div>
-</section>
+    <div class="project">
+      <h3>Business Data Analyst & Website Co-Developer – NouraKreates</h3>
+      <p>
+        Built analytics dashboards and conducted A/B testing to analyze user behavior
+        and optimize conversions for an e-commerce platform.
+      </p>
+      <p class="tech">SQL, Google Analytics, Data Visualization</p>
+      <a href="https://nourakreates.com" target="_blank">Live Website</a>
+    </div>
+
+    <div class="project">
+      <h3>Tour Website Developer – Elyanna (Shop.Elyanna.com)</h3>
+      <p>
+        Collaborated on the development of Elyanna’s official merchandise and tour
+        website, supporting high-traffic product launches and live tour updates.
+      </p>
+      <p class="tech">Shopify, Liquid, HTML/CSS, JavaScript</p>
+      <a href="https://shop.elyanna.com" target="_blank">Live Website</a>
+    </div>
   </div>
 </body>
 </html>
